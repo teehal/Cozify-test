@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Test nro 1</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="scripts/knockout-3.4.2.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+        <script type="text/javascript" src="scripts/ownscripts.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/ownstyle.css">        
+    </head>
+    <body>
+    <!-- Navigation tabs -->          
+              <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item active"><a  role="tab" class="nav-link" data-toggle="tab" href="#home">Surveillance video<span class="sr-only">(current)</span></a></li>
+                  <li class="nav-item"><a role="tab" class="nav-link" data-toggle="tab" href="#doors">Doors</a></li>
+                  <li class="nav-item"><a role="tab" data-toggle="tab" class="nav-link" href="#sensors">Sensors</a></li>
+                  <li class="nav-item"><a role="tab" data-toggle="tab" class="nav-link" href="#temperature">Temperature</a></li>
+              </ul>
+    <!-- Tab content -->
+              <div class="tab-content">
+    <!-- Surveillance tab -->              
+                    <div class="tab-pane active" id="home" role="tabpanel">
+                        <table class="table">
+                        <tbody data-bind="foreach: cameras">
+                        <tr>
+            <!--                <div data-bind="foreach: cameras">
+                        <div class="floaters"> -->
+                        <td>   
+                            <canvas id="videoCan" class="vidcan"></canvas>
+                        </td> 
+            <!--            </div> -->
+             <!--           <div class="floaters"> -->
+                        <td class="owntd">
+                                <div>
+                                <div class="vidtext first">
+                                    Show video
+                                </div>
+                                <button type='button' data-toggle='button' class='btn btn-toggle' data-bind='enable: cameraStatus'><div class='handle'></div></button>
+                                </div>
+                                <div>
+                                <div class="vidtext">
+                                    Device state
+                                </div>
+                                <div data-bind="html: toggleButton, click: $parent.cameraChange"></div>
+                            <!--    <button type='button' data-toggle='button' class='btn btn-toggle active' data-bind='click: $parent.changeCameraStatus'><div class='handle'></div></button> -->
+                            </div> 
+                            <div>
+                                <div class="vidtext">
+                                    Capture video
+                                </div>
+                                <button type='button' data-toggle='button' class='btn btn-toggle' data-bind='enable: cameraStatus'><div class='handle'></div></button>
+                            </div>
+            <!--            </div>
+                        <div class="clearFloat"></div>
+                        </div>-->
+                        </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    
+    <!-- Doors tab -->                
+                    <div class="tab-pane" id="doors" role="tabpanel">
+                            <div class="button_row">
+                                    <button type="button" class="btn btn-secondary refresh" data-bind="click: getDoors">Refresh</button>
+                            </div>
+                            <div class="button_row">
+                                <button type="button" class="btn btn-success enable" data-bind="click: enableDoors" >Enable All</button>
+                                <button type="button" class="btn btn-danger disable" data-bind="click: disableDoors">Disable All</button>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <th>Identifier</th>
+                                    <th>Current state</th>
+                                    <th>Last change</th>
+                                    <th>Sensor status</th>
+                                </thead>
+                                <tbody data-bind="foreach: doors">
+                                    <tr data-bind="css: {'table-danger': !doorStatus || doorState == 'Unknown'}">
+                                        <td data-bind="text: doorId"></td>
+                                        <td data-bind="text: doorState"></td>
+                                        <td data-bind="text: timeChange"></td>
+                                        <td data-bind="html: toggleButton, click: $parent.doorChange"></td>
+                                </tbody>
+                            </table>
+                    </div>
+    <!-- Sensors tab -->                
+                    <div class="tab-pane" id="sensors" role="tabpanel">
+                            <div class="button_row">
+                                    <button type="button" class="btn btn-secondary refresh" data-bind="click: getSensors">Refresh</button>
+                            </div>
+                            <div class="button_row">
+                                <button type="button" class="btn btn-success enable" data-bind="click: enableAll">Enable All</button>
+                                <button type="button" class="btn btn-danger disable" data-bind="click: disableAll">Disable All</button>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <th>Identifier</th>
+                                    <th>Current state</th>
+                                    <th>Last change</th>
+                                    <th>Sensor status</th>
+                                </thead>
+                            <tbody data-bind="foreach: sensors">
+                                <tr data-bind="css: {'table-danger' : sensorState == 'Triggered' || sensorState == 'Unknown' || !sensorStatus}">
+                                    <td data-bind="text: sensorId"></td>
+                                    <td data-bind="text: sensorState, style: {color: sensorState == 'Triggered' ? 'red' : 'black', fontWeight: sensorState == 'Triggered' ? 'bold' :''}"></td>
+                                    <td data-bind="text: timeChange"></td>
+                                    <td data-bind="html: toggleButton, click: $parent.statusChange"></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </div>
+    <!-- Temperature tab -->                
+                    <div class="tab-pane" id="temperature" role="tabpane">
+                            <div class="tempFloat">
+                            <div class="tempButtons">
+                                <button type="button" class="btn btn-secondary refresh" data-bind="click: getTemps">Refresh</button>
+                            </div>
+                            <div class="tempButtons">
+                                <button type="button" class="btn btn-primary">Save a copy</button>
+                            </div>
+                            </div>
+                            <div class="tempFloat">
+                                <h2 class="tempHeader">Current temperatures:  
+                                    <span data-bind="foreach: temps">
+                                    <span class="tempsOutIn" data-bind="if: TempId == 'Out'"><span data-bind="text: 'Out ' + TempValue + ' &deg;C'" style='color:blue'></span></span>
+                                    <span class="tempsOutIn" data-bind="if: TempId == 'In'"><span data-bind="text: 'In ' + TempValue + ' &deg;C'"  style='color:red'></span></span>
+                                    </span>
+                                </h2>
+                            </div>
+                            <div class="clearFloat"></div>
+                            <div class="canvasPos">
+                                <canvas id="tempChart" width="960" height="480"></canvas>
+                            </div>
+                    </div>
+              </div>
+          </div>
+ <!--    </nav> -->
+    <script>
+        var doorViewModel = new doorViewModel();
+        var sensorViewModel = new sensorsViewModel();
+        var videoViewModel = new videoViewModel();
+        var tempViewModel = new tempViewModel();
+        ko.applyBindings( doorViewModel, $('#doors')[0] );
+        ko.applyBindings( sensorViewModel, $('#sensors')[0] );
+        ko.applyBindings( videoViewModel, $('#home')[0] );
+        ko.applyBindings( tempViewModel, $('#temperature')[0] );
+        var ctx = document.getElementById( "tempChart" ).getContext( '2d' );
+        drawTemperaturePlot( ctx );
+    </script>
+    </body>
+</html>

@@ -1,0 +1,168 @@
+.nav-link.active {
+    background-color: rgb(231, 231, 231);
+}
+
+.nav-tabs a {
+    color:black;
+}
+
+.nav-item {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.nav-item:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+
+.btn-toggle {
+    margin: 0 1rem;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 1.5rem;
+    width: 3rem;
+    border-radius: 1.5rem;
+    color: #6b7381;
+    background: #bdc1c8;
+    background-color: #dc3545;
+}
+
+.btn-toggle:focus,
+.btn-toggle.focus,
+.btn-toggle:focus.active,
+.btn-toggle.focus.active {
+    outline: none;
+}
+
+.btn-toggle:before,
+.btn-toggle:after {
+    line-height: 1.5rem;
+    width: 4rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+
+.btn-toggle:before {
+    left: -4rem;
+}
+
+.btn-toggle:after {
+    right: -4rem;
+    opacity: .5;
+}
+
+.btn-toggle > .handle {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 1.125rem;
+    background: #fff;
+    transition: left .25s;
+}
+
+.btn-toggle.active {
+    background-color: #28a745;
+    transition: background-color 0.25s;
+}
+
+.btn-toggle.active > .handle {
+    left: 1.6875rem;
+    transition: left .25s;
+}
+
+.btn-toggle.active:before {
+    opacity: .5;
+}
+
+.btn-toggle.active:after {
+    opacity: 1;
+}
+
+.button_row:first-child {
+    float:left;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.button_row:nth-child(2) {
+    float:right;
+    margin-right: 13.75%;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.tempButtons {
+    float: left;
+    margin-top: 0.5rem;
+}
+
+.tempButtons:first-child {
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
+.canvasPos {
+    margin-top: 2rem;
+}
+
+.clearFloat {
+    clear: both;
+}
+
+.vidcan {
+    width: 640px;
+    height: 480px;
+    border: 1px solid black;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.floaters {
+    float:left;
+}
+
+.floaters:nth-child(2) {
+    margin-top: 2rem;
+    margin-left: 5rem;
+}
+
+.vidtext {
+    margin-bottom: 0.3rem;
+    margin-top: 3rem;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.vidtext.first {
+    margin-top:0rem;
+}
+
+.tempFloat {
+    float: left;
+}
+
+.tempHeader {
+    margin-left: 5rem;
+    margin-top:0.5rem;
+}
+
+td.owntd {
+    padding-right:50%;
+    padding-top:2.4rem;
+}
+
+.tempsOutIn {
+    margin-left: 1rem;
+}
+
